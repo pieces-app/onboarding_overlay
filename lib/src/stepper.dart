@@ -508,6 +508,13 @@ class OnboardingStepperState extends State<OnboardingStepper> with TickerProvide
     return Listener(
       behavior: step.overlayBehavior,
       onPointerDown: (PointerDownEvent details) {
+        /// This is to account for users who may click the top of the window to drag the position.
+        ///
+        /// If the user is clicking in what's believed to be a window-draggable space, we won't fire the callbacks.
+        ///
+        /// Specific to Pieces.
+        if (details.position.dy <= 26) return;
+
         // log('global listener');
         final BoxHitTestResult result = BoxHitTestResult();
         final RenderBox overlayBox = overlayKey.currentContext?.findRenderObject() as RenderBox;
