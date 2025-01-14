@@ -763,7 +763,11 @@ class AnimatedOverlay extends StatelessWidget {
           size.height,
         ),
         painter: OverlayPainter(
-          fullscreen: step.fullscreen,
+          /// Hard-coding the overlay to be full-screen in our case (Pieces) so that the
+          /// height of the overlay doesn't shrink when scaling the device width down.
+          ///
+          /// This is for responsiveness related to the LTM tour.
+          fullscreen: true,
           shape: step.shape,
           isEmpty: isEmpty,
           overlayShape: step.overlayShape,
